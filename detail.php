@@ -1,3 +1,21 @@
+<?php
+  // 引入配置
+  require_once './config.php';
+
+  // 引入函数
+  require_once './functions.php';
+
+  // 接数据
+  $postId = $_GET['postId'];
+
+  // 查询详细信息
+  $postData = my_query("SELECT * FROM posts WHERE id = $postId")[0];
+
+  // header('Access-Control-Allow-Origin: *');
+
+  // 修改页面显示
+  // print_r($postData);
+?>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -180,77 +198,55 @@
       </div>
     </div>
     <div class="content">
-      <div class="panel new">
-        <h3>会生活</h3>
-        <div class="entry">
-          <div class="head">
-            <a href="javascript:;">星球大战：原力觉醒视频演示 电影票68</a>
-          </div>
-          <div class="main">
-            <p class="info">admin 发表于 2015-06-29</p>
-            <p class="brief">星球大战:原力觉醒：《星球大战:原力觉醒》中国首映盛典红毯，星球大战:原力觉醒：《星球大战:原力觉醒》中国首映盛典红毯，星球大战:原力觉醒：《星球大战:原力觉醒》中国首映盛典红毯星球大战:原力觉醒：《星球大战:原力觉醒》中国首映盛典红毯，星球大战:原力觉醒：《星球大战:原力觉醒》中国首映盛典红毯，星球大战:原力觉醒：《星球大战:原力觉醒》中国首映盛典红毯</p>
-            <p class="extra">
-              <span class="reading">阅读(3406)</span>
-              <span class="comment">评论(0)</span>
-              <a href="javascript:;" class="like">
-                <i class="fa fa-thumbs-up"></i>
-                <span>赞(167)</span>
-              </a>
-              <a href="javascript:;" class="tags">
-                分类：<span>星球大战</span>
-              </a>
-            </p>
-            <a href="javascript:;" class="thumb">
-              <img src="/static/uploads/hots_2.jpg" alt="">
-            </a>
-          </div>
+      <div class="article">
+        <div class="breadcrumb">
+          <dl>
+            <dt>当前位置：</dt>
+            <dd><a href="javascript:;">奇趣事</a></dd>
+            <dd><?php echo $postData['title']; ?></dd>
+          </dl>
         </div>
-        <div class="entry">
-          <div class="head">
-            <a href="javascript:;">星球大战：原力觉醒视频演示 电影票68</a>
-          </div>
-          <div class="main">
-            <p class="info">admin 发表于 2015-06-29</p>
-            <p class="brief">星球大战:原力觉醒：《星球大战:原力觉醒》中国首映盛典红毯，星球大战:原力觉醒：《星球大战:原力觉醒》中国首映盛典红毯，星球大战:原力觉醒：《星球大战:原力觉醒》中国首映盛典红毯星球大战:原力觉醒：《星球大战:原力觉醒》中国首映盛典红毯，星球大战:原力觉醒：《星球大战:原力觉醒》中国首映盛典红毯，星球大战:原力觉醒：《星球大战:原力觉醒》中国首映盛典红毯</p>
-            <p class="extra">
-              <span class="reading">阅读(3406)</span>
-              <span class="comment">评论(0)</span>
-              <a href="javascript:;" class="like">
-                <i class="fa fa-thumbs-up"></i>
-                <span>赞(167)</span>
-              </a>
-              <a href="javascript:;" class="tags">
-                分类：<span>星球大战</span>
-              </a>
-            </p>
-            <a href="javascript:;" class="thumb">
-              <img src="/static/uploads/hots_2.jpg" alt="">
-            </a>
-          </div>
+        <h2 class="title">
+          <a href="javascript:;"><?php echo $postData['title']; ?></a>
+        </h2>
+        <div class="meta">
+          <span>DUX主题小秘 发布于 <?php echo $postData['created']; ?></span>
+          <span>分类: <a href="javascript:;">奇趣事</a></span>
+          <span>阅读: (<?php echo $postData['views']; ?>)</span>
+          <span>评论: (<?php echo $postData['likes']; ?>)</span>
         </div>
-        <div class="entry">
-          <div class="head">
-            <a href="javascript:;">星球大战：原力觉醒视频演示 电影票68</a>
-          </div>
-          <div class="main">
-            <p class="info">admin 发表于 2015-06-29</p>
-            <p class="brief">星球大战:原力觉醒：《星球大战:原力觉醒》中国首映盛典红毯，星球大战:原力觉醒：《星球大战:原力觉醒》中国首映盛典红毯，星球大战:原力觉醒：《星球大战:原力觉醒》中国首映盛典红毯星球大战:原力觉醒：《星球大战:原力觉醒》中国首映盛典红毯，星球大战:原力觉醒：《星球大战:原力觉醒》中国首映盛典红毯，星球大战:原力觉醒：《星球大战:原力觉醒》中国首映盛典红毯</p>
-            <p class="extra">
-              <span class="reading">阅读(3406)</span>
-              <span class="comment">评论(0)</span>
-              <a href="javascript:;" class="like">
-                <i class="fa fa-thumbs-up"></i>
-                <span>赞(167)</span>
-              </a>
-              <a href="javascript:;" class="tags">
-                分类：<span>星球大战</span>
-              </a>
-            </p>
-            <a href="javascript:;" class="thumb">
+        <!-- 设置内容的位置 -->
+        <img src="<?php echo $postData['feature']; ?>" alt="">
+        <p><?php echo $postData['content']; ?></p>
+      </div>
+      <div class="panel hots">
+        <h3>热门推荐</h3>
+        <ul>
+          <li>
+            <a href="javascript:;">
               <img src="/static/uploads/hots_2.jpg" alt="">
+              <span>星球大战:原力觉醒视频演示 电影票68</span>
             </a>
-          </div>
-        </div>
+          </li>
+          <li>
+            <a href="javascript:;">
+              <img src="/static/uploads/hots_3.jpg" alt="">
+              <span>你敢骑吗？全球第一辆全功能3D打印摩托车亮相</span>
+            </a>
+          </li>
+          <li>
+            <a href="javascript:;">
+              <img src="/static/uploads/hots_4.jpg" alt="">
+              <span>又现酒窝夹笔盖新技能 城里人是不让人活了！</span>
+            </a>
+          </li>
+          <li>
+            <a href="javascript:;">
+              <img src="/static/uploads/hots_5.jpg" alt="">
+              <span>实在太邪恶！照亮妹纸绝对领域与私处</span>
+            </a>
+          </li>
+        </ul>
       </div>
     </div>
     <div class="footer">
